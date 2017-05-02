@@ -1,11 +1,17 @@
 # scrawl-beautifulsoup
 
-    from urllib.request import urlopen
-    from bs4 import BeautifulSoup
-    import re
+Python 3.6.0
+
+BeautifulSoup 4.5.3 [Beautiful Soup 4.4.0 文档](http://beautifulsoup.readthedocs.io/zh_CN/latest/)
+
+Selenium [Selenium with Python中文翻译文档](http://selenium-python-zh.readthedocs.io/en/latest/index.html)
+
+Webdriver
+
+Chrome浏览器
 
 ## 论坛 ##
-天涯 [http://bbs.tianya.cn](http://bbs.tianya.cn "天涯")
+[天涯](http://bbs.tianya.cn)
 
 目前实现的功能：
 
@@ -14,7 +20,7 @@
 2. 可自定义提取的版块名称、版块内爬取深度，以及帖子爬取深度
 
 ## 导航网站 ##
-谷歌265 [http://www.265.com/](http://www.265.com/ "谷歌265")
+[谷歌265](http://www.265.com/)
 
 目前实现的功能：
 
@@ -22,4 +28,19 @@
 
 2. 可以选择所要提取的分类
 
-4/20/2017 10:38:39 AM 
+## 网购网站 ##
+[淘宝](https://www.taobao.com/)
+
+目前实现的功能：
+
+1. 在各商品分类下提取商品名称、价格、评价总数、各类评价数量
+
+有待改进的地方：
+
+1. 有些大分类下的网站格式不同（童装玩具、孕产、用品），用js加载类目，还有些（尤其是后面的分类网页）也不符合查找的格式，无法用<dl class="theme-bd-level2">找出，需要进行对应修改
+
+2. 有些url对中文没有正确编码，无法用urlopen直接打开，需要改进encode,decode函数
+
+3. 在查找累计评论数的时候，没有用WebDriverWait函数，而是直接time.sleep了2秒钟，有待改进
+
+5/2/2017 9:50:30 PM 
