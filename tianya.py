@@ -62,37 +62,38 @@ def getPostData(postUrl):
 	else:
 		return None
 
-html = urlopen("http://bbs.tianya.cn/")
-bsObj = BeautifulSoup(html.read(),"lxml")						# 用BeautifulSoup指定lxml解析器解析
+if __name__ == '__main__':
+	html = urlopen("http://bbs.tianya.cn/")
+	bsObj = BeautifulSoup(html.read(),"lxml")						# 用BeautifulSoup指定lxml解析器解析
 
-forumList = bsObj.findAll("a", {"class": "child_link"}, href=re.compile("^(?!(http))"))		# 找到各版块
-for forum in forumList:
-	print(forum.get_text())										# 各版块名称
-
-forumName = input("请输入所要查询版块名称（按回车默认全部）：")
-forumDeep = input("请输入版块深度（论坛版块前几页）：")
-postDeep = input("请输入帖子深度（最多到前几页）：")
-
-if forumDeep.strip() == "":										# 如果没输入，默认版块深度为1
-	forumDeep = 1
-if postDeep.strip() == "":										# 如果没输入，默认帖子深度为3
-	postDeep = 3
-
-if forumName.strip() == "":										# 默认全部版块
+	forumList = bsObj.findAll("a", {"class": "child_link"}, href=re.compile("^(?!(http))"))		# 找到各版块
 	for forum in forumList:
-		print(forum.get_text())  								# 版块名称
-		eachForumUrl = getPage(forum.attrs['href'])  			# 版块链接（含http://bbs.tianya.cn）
-		for i in range(int(forumDeep)):
-			print("版块第", i + 1, "页：")
-			nextPage = getPostInf(eachForumUrl, int(postDeep))  # 下一页链接（不含http://bbs.tianya.cn）
-			eachForumUrl = getPage(nextPage)
-else:															# 选定某一版块时
-	for forum in forumList:
-		if forum.get_text() == forumName:
-			print(forum.get_text())  							# 版块名称
-			eachForumUrl = getPage(forum.attrs['href'])			# 版块链接（含http://bbs.tianya.cn）
+		print(forum.get_text())										# 各版块名称
+
+	forumName = input("请输入所要查询版块名称（按回车默认全部）：")
+	forumDeep = input("请输入版块深度（论坛版块前几页）：")
+	postDeep = input("请输入帖子深度（最多到前几页）：")
+
+	if forumDeep.strip() == "":										# 如果没输入，默认版块深度为1
+		forumDeep = 1
+	if postDeep.strip() == "":										# 如果没输入，默认帖子深度为3
+		postDeep = 3
+
+	if forumName.strip() == "":										# 默认全部版块
+		for forum in forumList:
+			print(forum.get_text())  								# 版块名称
+			eachForumUrl = getPage(forum.attrs['href'])  			# 版块链接（含http://bbs.tianya.cn）
 			for i in range(int(forumDeep)):
-				print("版块第", i+1, "页：")
-				nextPage = getPostInf(eachForumUrl, int(postDeep))		# 下一页链接（不含http://bbs.tianya.cn）
+				print("版块第", i + 1, "页：")
+				nextPage = getPostInf(eachForumUrl, int(postDeep))  # 下一页链接（不含http://bbs.tianya.cn）
 				eachForumUrl = getPage(nextPage)
+	else:															# 选定某一版块时
+		for forum in forumList:
+			if forum.get_text() == forumName:
+				print(forum.get_text())  							# 版块名称
+				eachForumUrl = getPage(forum.attrs['href'])			# 版块链接（含http://bbs.tianya.cn）
+				for i in range(int(forumDeep)):
+					print("版块第", i+1, "页：")
+					nextPage = getPostInf(eachForumUrl, int(postDeep))		# 下一页链接（不含http://bbs.tianya.cn）
+					eachForumUrl = getPage(nextPage)
 

@@ -55,18 +55,20 @@ def Other():
 	print("【其他】")
 	printWebSite(otherthings)
 
-html = urlopen("http://www.265.com/")
-bsObj = BeautifulSoup(html.read(), "lxml")					# 用BeautifulSoup指定lxml解析器解析
 
-choice1 = input("请选择 1.生活服务 2.休闲娱乐 3.其他 (输入数字即可)(回车默认全选)：")
-if choice1.strip() == "":
-	Life()
-	Relax()
-	Other()
-else:
-	if int(choice1) == 1:
+if __name__ == '__main__':
+	html = urlopen("http://www.265.com/")
+	bsObj = BeautifulSoup(html.read(), "lxml")					# 用BeautifulSoup指定lxml解析器解析
+
+	choice1 = input("请选择 1.生活服务 2.休闲娱乐 3.其他 (输入数字即可)(回车默认全选)：")
+	if choice1.strip() == "":
 		Life()
-	if int(choice1) == 2:
 		Relax()
-	if int(choice1) == 3:
 		Other()
+	else:
+		if int(choice1) == 1:
+			Life()
+		if int(choice1) == 2:
+			Relax()
+		if int(choice1) == 3:
+			Other()
