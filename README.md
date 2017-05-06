@@ -2,8 +2,8 @@
 
 ![](https://img.shields.io/badge/Python-3.6.1-blue.svg?style=flat)
 ![](https://img.shields.io/badge/BeautifulSoup-4.5.3-brightgreen.svg?style=flat) 
-![](https://img.shields.io/badge/lxml--green.svg?style=flat)
-![](https://img.shields.io/badge/Selenium--yellow.svg?style=flat) 
+![](https://img.shields.io/badge/lxml-3.7.3-green.svg?style=flat)
+![](https://img.shields.io/badge/Selenium-3.4.1-yellow.svg?style=flat) 
 ![](https://img.shields.io/badge/Webdriver-PhantomJS-orange.svg?style=flat)
 ![](https://img.shields.io/badge/Chorme--red.svg?style=flat)
 
