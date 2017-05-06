@@ -1,11 +1,11 @@
 # scrawl-beautifulsoup
 
-![](https://img.shields.io/badge/Python-3.6.1-brightgreen.svg?style=flat)
-![](https://img.shields.io/badge/BeautifulSoup-4.5.3-green.svg?style=flat) 
-![](https://img.shields.io/badge/lxml--yellow.svg?style=flat)
-![](https://img.shields.io/badge/Selenium--orange.svg?style=flat) 
-![](https://img.shields.io/badge/Webdriver-PhantomJS-red.svg?style=flat)
-![](https://img.shields.io/badge/Chorme--blue.svg?style=flat)
+![](https://img.shields.io/badge/Python-3.6.1-blue.svg?style=flat)
+![](https://img.shields.io/badge/BeautifulSoup-4.5.3-brightgreen.svg?style=flat) 
+![](https://img.shields.io/badge/lxml--green.svg?style=flat)
+![](https://img.shields.io/badge/Selenium--yellow.svg?style=flat) 
+![](https://img.shields.io/badge/Webdriver-PhantomJS-orange.svg?style=flat)
+![](https://img.shields.io/badge/Chorme--red.svg?style=flat)
 
 [Beautiful Soup 4.4.0 文档](http://beautifulsoup.readthedocs.io/zh_CN/latest/)
 
