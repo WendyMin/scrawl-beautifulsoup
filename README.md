@@ -1,14 +1,16 @@
 # scrawl-beautifulsoup
 
-Python 3.6.0
+![](https://img.shields.io/badge/Python-3.6.1-blue.svg?style=flat)
+![](https://img.shields.io/badge/BeautifulSoup-4.5.3-brightgreen.svg?style=flat) 
+![](https://img.shields.io/badge/lxml-3.7.3-green.svg?style=flat)
+![](https://img.shields.io/badge/Selenium-3.4.1-yellow.svg?style=flat) 
+![](https://img.shields.io/badge/Webdriver-PhantomJS-orange.svg?style=flat)
+![](https://img.shields.io/badge/Chorme--red.svg?style=flat)
 
-BeautifulSoup 4.5.3 [Beautiful Soup 4.4.0 文档](http://beautifulsoup.readthedocs.io/zh_CN/latest/)
+[Beautiful Soup 4.4.0 文档](http://beautifulsoup.readthedocs.io/zh_CN/latest/)
 
-Selenium [Selenium with Python中文翻译文档](http://selenium-python-zh.readthedocs.io/en/latest/index.html)
+[Selenium with Python中文翻译文档](http://selenium-python-zh.readthedocs.io/en/latest/index.html)
 
-Webdriver
-
-Chrome浏览器
 
 ## 论坛 ##
 [天涯](http://bbs.tianya.cn)
@@ -37,7 +39,7 @@ Chrome浏览器
 
 有待改进的地方：
 
-1. 有些大分类下的网站格式不同（童装玩具、孕产、用品），用js加载类目，还有些（尤其是后面的分类网页）也不符合查找的格式，无法用<dl class="theme-bd-level2">找出，需要进行对应修改
+1. 有些大分类下的网站格式不同（童装玩具、孕产、用品），用js加载类目，还有些（尤其是后面的分类网页）也不符合查找的格式，无法用`<dl class="theme-bd-level2">`找出，需要进行对应修改
 
 2. 有些url对中文没有正确编码，无法用urlopen直接打开，需要改进encode,decode函数
 
