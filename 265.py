@@ -50,13 +50,11 @@ def printWebSite(somethings):
 				print(webPage.get_text())
 				WriteFile(webPage.get_text())
 				page1 = webPage.parent.parent.nextSibling.a.parent
-				# print(page1.a.get_text(), ":", page1.a.attrs["href"])
 				print(page1.a.get_text(), ":", checkUrl(page1.a.attrs["href"]))
 				WriteFile(page1.a.get_text()+":"+page1.a.attrs["href"])
 				pageNext = page1.nextSibling
 				while pageNext != None:
 					if re.search(re.compile("^(http)"), pageNext.a.attrs["href"]):  # 天气->湛江 的网址不对
-						# print(pageNext.get_text(), ":", pageNext.a.attrs["href"])
 						print(pageNext.get_text(), ":", checkUrl(pageNext.a.attrs["href"]))
 						WriteFile(pageNext.get_text()+":"+pageNext.a.attrs["href"])
 					pageNext = pageNext.nextSibling
