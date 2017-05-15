@@ -27,7 +27,7 @@ def getPage(url):
 	bsObj = BeautifulSoup(html, "lxml")
 	return bsObj
 
-# 如果url不符合规范，加上https:
+# 规范url格式：如果url不符合规范，加上https:
 def checkUrl(url):
 	if re.search(re.compile("^(https).*"), str(url)):
 		href = str(url)
@@ -35,9 +35,9 @@ def checkUrl(url):
 		href = str("https:" + url)
 	return href
 
-# 找到首页下商品分类，调用getSmallCategoryUrl函数，打印分类
+# 找到首页下商品分类，调用getSmallCategory函数，打印分类
 # 目前就从女装到配件
-def getCategoryUrl(bsObj):
+def getCategory(bsObj):
 	global pages
 	categories = bsObj.find("ul", {"class": "service-bd"}).findAll("a")			# 找到首页下每个商品分类
 	for category in categories:
@@ -49,10 +49,10 @@ def getCategoryUrl(bsObj):
 				pages.add(categoryHref)
 				print("【", category.get_text(), "】")							# 打印商品分类
 				# print(categoryHref)											# 打印商品分类跳转页面
-				getSmallCategoryUrl(categoryHref)
+				getSmallCategory(categoryHref)
 
 # 找到每个大分类下的小分类，调用getGoods函数
-def getSmallCategoryUrl(CategoryUrl):
+def getSmallCategory(CategoryUrl):
 	SmallCategoryBsObj = getPage(CategoryUrl)
 	smallcategories = SmallCategoryBsObj.findAll("dl", {"class": "theme-bd-level2"})		# 找到大分类下小分类位置
 	for smallcategory in smallcategories:
@@ -64,7 +64,7 @@ def getSmallCategoryUrl(CategoryUrl):
 				pageBsObj = getPage(smallCategoryRealHref)
 				getGoods(smallCategoryRealHref)
 			except:
-				print("getSmallCategoryUrl error")
+				print("getSmallCategory error")
 
 # 打印商品信息
 def getGoods(url):
@@ -96,4 +96,4 @@ def getGoods(url):
 
 if __name__ == '__main__':
 	bsObj = getPage("https://www.taobao.com/")
-	getCategoryUrl(bsObj)
+	getCategory(bsObj)
