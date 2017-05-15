@@ -44,7 +44,7 @@ def getPostData(postUrl):
 	if postbsObj.find("div", {"class": "atl-info"}) != None:								# 如果是网页格式正确（有极个别网页乱码）
 		postAuthor = postbsObj.find("div", {"class": "atl-info"}).span.a.attrs['uname']		# 发帖人
 		postArticle = postbsObj.find("div", {"class": "bbs-content clearfix"})				# 1楼（主帖）
-		posters = postbsObj.find_all("div", {"class": "atl-info"})							# 所有帖子
+		posters = postbsObj.findAll("div", {"class": "atl-info"})							# 所有帖子
 		if postArticle != None:																# 如果是主帖，打印出来
 			print(postAuthor, ":", postArticle.get_text().strip())
 		t = 0
