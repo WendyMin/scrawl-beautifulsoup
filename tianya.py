@@ -61,7 +61,7 @@ def getPostData(postUrl):
 		return None
 
 # 针对特定版块，实现所有功能
-def printForum(forum):
+def printForum(forum, forumDeep):
 	print(forum.get_text())  # 版块名称
 	eachForumUrl = getPage(forum.attrs['href'])  # 版块链接（含http://bbs.tianya.cn）
 	for i in range(int(forumDeep)):
@@ -88,8 +88,8 @@ if __name__ == '__main__':
 
 	if forumName.strip() == "":										# 默认全部版块
 		for forum in forumList:
-			printForum(forum)
+			printForum(forum, forumDeep)
 	else:															# 选定某一版块时
 		for forum in forumList:
 			if forum.get_text() == forumName:
-				printForum(forum)
+				printForum(forum, forumDeep)
