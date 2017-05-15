@@ -27,20 +27,24 @@ def getPage(url):
 	bsObj = BeautifulSoup(html, "lxml")
 	return bsObj
 
+# 如果url不符合规范，加上https:
+def checkUrl(url):
+	if re.search(re.compile("^(https).*"), str(url)):
+		href = str(url)
+	else:
+		href = str("https:" + url)
+	return href
+
 # 找到首页下商品分类，调用getSmallCategoryUrl函数，打印分类
 # 目前就从女装到配件
 def getCategoryUrl(bsObj):
 	global pages
-	categories = bsObj.find("ul", {"class": "service-bd"}).findAll("a")			# 找到首页下个商品分类
+	categories = bsObj.find("ul", {"class": "service-bd"}).findAll("a")			# 找到首页下每个商品分类
 	for category in categories:
 		if category.get_text() == "童装玩具":										# 先到童装玩具部分截止
 			return None
 		else:
-			categoryHref = category.attrs['href']
-			if re.search(re.compile("^(https).*"), str(categoryHref)):			# 如果url不符合规范，加上https:
-				categoryHref = str(categoryHref)
-			else:
-				categoryHref = str("https:" + category.attrs['href'])
+			categoryHref = checkUrl(category.attrs['href'])
 			if categoryHref not in pages and category.get_text() != "手机":  	# 户外、生鲜、零食、用品的url重复，手机与数码页面分类内容一模一样，过滤
 				pages.add(categoryHref)
 				print("【", category.get_text(), "】")							# 打印商品分类
@@ -55,11 +59,7 @@ def getSmallCategoryUrl(CategoryUrl):
 		smallcategoryGroup = smallcategory.findAll("a")
 		for smallCategoryReal in smallcategoryGroup:									# 找到每个小分类
 			print("[", smallCategoryReal.get_text(), "]")
-			smallCategoryRealHref = smallCategoryReal.attrs['href']
-			if re.search(re.compile("^(https).*"), str(smallCategoryRealHref)):			# 如果url不符合规范，加上https:
-				smallCategoryRealHref = str(smallCategoryRealHref)
-			else:
-				smallCategoryRealHref = str("https:" + smallCategoryRealHref)
+			smallCategoryRealHref = checkUrl(smallCategoryReal.attrs['href'])
 			try:
 				pageBsObj = getPage(smallCategoryRealHref)
 				getGoods(smallCategoryRealHref)
@@ -76,11 +76,7 @@ def getGoods(url):
 	for detail in details:
 		print("商品名称", detail.img.attrs['alt'])  							# 商品名称
 		print("价格:", detail.a.attrs['trace-price'])  						# 价格
-		goodHref = detail.a.attrs['href']
-		if re.search(re.compile("^(https).*"), str(goodHref)):  			# 如果url不符合规范，加上https:
-			goodHref = str(goodHref)
-		else:
-			goodHref = str("https:" + goodHref)
+		goodHref = checkUrl(detail.a.attrs['href'])
 		print(goodHref)
 		driver.get(goodHref)
 		time.sleep(2)
@@ -89,7 +85,6 @@ def getGoods(url):
 		button.click()
 		try:
 			element = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.ID, "reviews-t-val1")))
-			a3 = driver.page_source
 			haoping = driver.find_element_by_xpath("//label[@for='reviews-t-val1']")  # 好评
 			print(haoping.text)
 			zhongping = driver.find_element_by_xpath("//label[@for='reviews-t-val0']")  # 中评
@@ -97,7 +92,7 @@ def getGoods(url):
 			chaping = driver.find_element_by_xpath("//label[@for='reviews-t-val-1']")  # 差评
 			print(chaping.text)
 		except:
-			print("find button error")
+			print("getGoods error")
 
 if __name__ == '__main__':
 	bsObj = getPage("https://www.taobao.com/")
