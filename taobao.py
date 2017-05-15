@@ -62,7 +62,6 @@ def getSmallCategoryUrl(CategoryUrl):
 				smallCategoryRealHref = str("https:" + smallCategoryRealHref)
 			try:
 				pageBsObj = getPage(smallCategoryRealHref)
-				# print(smallCategoryRealHref)
 				getGoods(smallCategoryRealHref)
 			except:
 				print("getSmallCategoryUrl error")
@@ -90,16 +89,15 @@ def getGoods(url):
 		button.click()
 		try:
 			element = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.ID, "reviews-t-val1")))
+			a3 = driver.page_source
+			haoping = driver.find_element_by_xpath("//label[@for='reviews-t-val1']")  # 好评
+			print(haoping.text)
+			zhongping = driver.find_element_by_xpath("//label[@for='reviews-t-val0']")  # 中评
+			print(zhongping.text)
+			chaping = driver.find_element_by_xpath("//label[@for='reviews-t-val-1']")  # 差评
+			print(chaping.text)
 		except:
 			print("find button error")
-		finally:
-			a3 = driver.page_source
-			haoping = driver.find_element_by_xpath("//label[@for='reviews-t-val1']")		# 好评
-			print(haoping.text)
-			zhongping = driver.find_element_by_xpath("//label[@for='reviews-t-val0']")		# 中评
-			print(zhongping.text)
-			chaping = driver.find_element_by_xpath("//label[@for='reviews-t-val-1']")		# 差评
-			print(chaping.text)
 
 if __name__ == '__main__':
 	bsObj = getPage("https://www.taobao.com/")
